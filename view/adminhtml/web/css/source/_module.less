@@ -1,0 +1,122 @@
+//
+//  Imports
+//  ---------------------------------------------
+
+@import './variables/_colors.less';
+@import './module/ui/_button.less';
+@import './module/ui/_modal.less';
+
+@import './module/_header.less';
+@import './module/_version.less';
+@import './module/_debug.less';
+
+// For new Styles
+@import './_extends.less';
+
+
+//
+//  Main sidebar logo
+//  ---------------------------------------------
+
+#menu-shopreviews-connect-base > a {
+	display: grid;
+	gap: 4px;
+
+	&::before {
+		display: none;
+	}
+
+	&::after {
+		content: '';
+
+		display: block;
+		order: -1;
+		height: 30px;
+
+		background-image: url('@{baseDir}Shopreviews_Connect/images/shopreviews_logo_small.svg');
+		background-position: center;
+		background-repeat: no-repeat;
+		text-indent: 50px;
+		background-size: 18px;
+	}
+}
+
+//
+//  Store -> Configuration logo
+//  ---------------------------------------------
+
+.admin__page-nav._collapsed.shopreviews-extensions .title:before {
+	display: none;
+}
+
+.admin__page-nav._collapsed.shopreviews-extensions .title,
+.admin__page-nav._collapsed._show.shopreviews-extensions .title {
+	background-image: url('@{baseDir}Shopreviews_Connect/images/shopreviews_logo_small.svg') !important;
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	text-indent: 45px;
+	background-size: auto 55%;
+}
+
+
+//
+//  Images on Grid pages - Icon
+//  ---------------------------------------------
+
+.shopreviews_com-platform-index .data-grid .data-grid-icon-cell {
+	width: 100px;
+	height: 100px;
+}
+
+.shopreviews_com-platform-index .data-grid .data-grid-icon-cell img {
+	border: 1px solid #d6d6d6;
+	background: white;
+	padding: 5px;
+	border-radius: 5px;
+	width:75px;
+	height: 75px;
+}
+
+.shopreviews_com-review-index .data-grid .data-grid-icon-cell img {
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.shopreviews_com-source-index .data-grid .data-grid-icon-cell img {
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+//
+//  Images on Grid pages - Logo
+//  ---------------------------------------------
+
+.shopreviews_com-platform-index .data-grid .data-grid-logo-cell {
+	width: 200px;
+	height: 100px;
+}
+
+.shopreviews_com-platform-index .data-grid .data-grid-logo-cell img {
+	border: 1px solid #d6d6d6;
+	background: white;
+	padding: 15px;
+	border-radius: 5px;
+	width: 180px;
+	height: 75px;
+}
+
+.shopreviews_com-review-index .data-grid .data-grid-logo-cell img {
+	background-color: white;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #d6d6d6;
+}
+
+.shopreviews_com-source-index .data-grid .data-grid-logo-cell img {
+	background-color: white;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #d6d6d6;
+}

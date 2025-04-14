@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/* @var Magento\Framework\View\Element\Template $block */
+/* @var Shopreviews\Connect\ViewModel\Header $viewModel */
+/* @var Shopreviews\Connect\ViewModel\Reviews $dataModel */
+$viewModel = $block->getViewModel();
+$dataModel = $block->getDataModel();
+?>
+<?php if ($ldJson = $viewModel->getStructuredData($dataModel->getWebsite(), $dataModel->getReviews())): ?>
+<script type="application/ld+json"><?= /* @noEscape */ $ldJson ?></script>
+<?php endif; ?>

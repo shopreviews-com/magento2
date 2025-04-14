@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Shopreviews_Connect::base"
+             title="Shopreviews" translate="title"
+             module="Shopreviews_Connect"
+             sortOrder="210"
+             resource="Shopreviews_Connect::base"
+        />
+
+        <!-- DATA SUB MENU -->
+        <add id="Shopreviews_Connect::data"
+             title="Data" translate="title"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::base"
+             resource="Shopreviews_Connect::data"
+             sortOrder="10"
+        />
+        <add id="Shopreviews_Connect::review_listing"
+             title="Reviews"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::data"
+             resource="Shopreviews_Connect::review_listing"
+             action="shopreviews_com/review/index"
+             sortOrder="11"
+        />
+        <add id="Shopreviews_Connect::source_listing"
+             title="Sources"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::data"
+             resource="Shopreviews_Connect::source_listing"
+             action="shopreviews_com/source/index"
+             sortOrder="12"
+        />
+        <add id="Shopreviews_Connect::platform_listing"
+             title="Platforms"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::data"
+             resource="Shopreviews_Connect::platform_listing"
+             action="shopreviews_com/platform/index"
+             sortOrder="13"
+        />
+        <add id="Shopreviews_Connect::website_listing"
+             title="Websites"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::data"
+             resource="Shopreviews_Connect::website_listing"
+             action="shopreviews_com/website/index"
+             sortOrder="14"
+        />
+
+        <!-- CONFIG SUB MENU -->
+        <add id="Shopreviews_Connect::config"
+             title="Config" translate="title"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::base"
+             resource="Shopreviews_Connect::base"
+             sortOrder="20"
+        />
+        <add id="Shopreviews_Connect::configuration"
+             title="Settings"
+             translate="title"
+             module="Shopreviews_Connect"
+             parent="Shopreviews_Connect::config"
+             resource="Shopreviews_Connect::configuration"
+             sortOrder="21"
+             action="admin/system_config/edit/section/shopreviews_com"/>
+    </menu>
+</config>

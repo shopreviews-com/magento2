@@ -1,0 +1,88 @@
+{
+    "shopreviews_review": {
+        "column": {
+            "entity_id": true,
+            "review_uuid": true,
+            "source_uuid": true,
+            "platform_uuid": true,
+            "company_uuid": true,
+            "name": true,
+            "description": true,
+            "rating": true,
+            "review_date": true,
+            "fetched_at": true
+        },
+        "index": {
+            "SHOPREVIEWS_REVIEW_REVIEW_UUID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_010F8E9AE3E676A90FC3C68A36C3E72C": true,
+            "SHOPREVIEWS_REVIEW_SOURCE_UUID_SHOPREVIEWS_SOURCE_SOURCE_UUID": true
+        }
+    },
+    "shopreviews_website": {
+        "column": {
+            "entity_id": true,
+            "website_uuid": true,
+            "short_code": true,
+            "company_uuid": true,
+            "name": true,
+            "slug": true,
+            "details": true,
+            "is_active": true,
+            "platform_created_at": true,
+            "platform_updated_at": true
+        },
+        "index": {
+            "SHOPREVIEWS_WEBSITE_WEBSITE_UUID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "shopreviews_source": {
+        "column": {
+            "entity_id": true,
+            "source_uuid": true,
+            "name": true,
+            "logo_url": true,
+            "url": true,
+            "review_link": true,
+            "company_uuid": true,
+            "platform_uuid": true,
+            "website_uuids": true,
+            "review_count": true,
+            "avg_rating": true,
+            "last_sync_at": true,
+            "next_sync_at": true,
+            "platform_created_at": true,
+            "platform_updated_at": true
+        },
+        "index": {
+            "SHOPREVIEWS_SOURCE_SOURCE_UUID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_4CEB5A30D637E00FB64D0C26C7A94BE6": true
+        }
+    },
+    "shopreviews_platform": {
+        "column": {
+            "entity_id": true,
+            "platform_uuid": true,
+            "name": true,
+            "logo": true,
+            "logo_icon": true,
+            "is_active": true,
+            "platform_created_at": true,
+            "platform_updated_at": true
+        },
+        "index": {
+            "SHOPREVIEWS_PLATFORM_PLATFORM_UUID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,214 @@
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<section class="review-totals">
+    <div class="review-totals-heading">
+        <b class="rating" data-bind="text: reviewsList.summary().averageRating"></b>
+        <span class="stars">
+            <span class="stars-empty"></span>
+            <span class="stars-filled" 
+                  data-bind="style: {width: +reviewsList.summary().averageRating*20 + '%'}">
+            </span>
+        </span>
+        <span class="count" data-bind="text: reviewsList.summary().totalReviews"></span>
+    </div>
+
+    <div class="review-totals-table">
+        <table>
+            <tbody data-bind="foreach: Object.values(reviewsList.summary().ratingsCount).reverse()">
+                <tr>
+                    <td class="label" data-bind="i18n: label"></td>
+                    <td class="fill">
+                        <div class="fill-row">
+                            <div class="filled" data-bind="style: { width: percentage + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="count" data-bind="text: count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="review-totals-list" data-bind="foreach: reviewsList.summary().platformList">
+        <div class="review-totals-list-item">
+            <div>
+                <img data-bind="attr: { src: logo }" alt="" />
+                <b class="rating" data-bind="text: rating"></b>
+            </div>
+            <div>
+                <b class="count" data-bind="text: count"></b>
+                <span data-bind="i18n: 'reviews placed on'"></span>
+                <span class="platform" data-bind="text: platformName"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="review-content">
+    <!--
+    <div class="review-search">
+        <input type="search" data-bind="attr: { placeholder: $t('Search Reviews...') }" autocomplete="off" />
+        <span class="action-search"></span>
+    </div>
+    -->
+
+    <div class="review-filter">
+        <!-- This is button to trigger modal with star filter -->
+        <!-- ko if: isFiltersVisible() -->
+        <a id="open-filters" class="open-filters" data-bind="mageInit: {'Shopreviews_Connect/js/modal':{}}, click: showFilters" style="display: none;">
+            <span data-bind="i18n: 'Filter Reviews'"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+            </svg>
+        </a>
+        <!-- /ko -->
+
+        <!-- ko if: reviews.filters.source.enabled  -->
+        <div class="filter-by-source">
+            <b class="label" data-bind="i18n: 'Filter by source'"></b>
+            <div class="source-list" data-bind="foreach: reviewsList.filters().source.data">
+                <span class="source-item" data-bind="css: { active: selected }, click: () => $parent.setFilterSource(value)">
+                    <img class="icon" data-bind="attr: { src: icon }" width="16" height="16" alt="" />
+                    <span class="source" data-bind="text: label"></span>
+                    <span class="count" data-bind="text: '(' + count + ')'"></span>
+                </span>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: reviews.filters.sorting.enabled  -->
+        <div class="filter-by-date">
+            <div class="select-wrapper" data-bind="css: { 'active': filter.sorting.current() === 'date_asc' }">
+                <div class="select" data-bind="click: () => setSorting(filter.sorting.next())">
+                    <span data-bind="i18n: 'Sort by date'"></span>
+                    <span class="arrow"></span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="reviews-list">
+        <!-- ko foreach: reviewsList.data  -->
+        <div class="reviews-item">
+            <h3 class="name" data-bind="text: name"></h3>
+            <span class="stars">
+                <span class="stars-empty"></span>
+                <span class="stars-filled" data-bind="style: {width: +total*20 + '%'}"></span>
+            </span>
+            <div class="comment" data-bind="text: description"></div>
+
+            <div class="platform-created">
+                <span class="icon">
+                    <img data-bind="attr: { src: platform_logo }" alt="" width="16" height="16" />
+                </span>
+                <span class="label">
+                    <span data-bind="i18n: 'Posted on'"></span>
+                    <b data-bind="text: platform_name"></b>
+                    <span data-bind="i18n: 'on'"></span>
+                    <b data-bind="text: created"></b>
+                </span>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko ifnot: reviewsList.data().length -->
+        <div><span class="message warning" data-bind="i18n: 'No reviews data available'"></span></div>
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if: reviewsList.data().length -->
+    <div class="review-pagination">
+        <!-- ko if: reviewsList.pagination().isAvailable -->
+        <div class="pages">
+            <ul class="items pages-items" aria-labelledby="paging-label">
+
+                <li class="item pages-item-previous">
+                    <span class="action  previous" data-bind="click: updateReviews.bind($data,reviewsList.pagination().prevValue)" title="Previous">
+                        <span class="label" data-bind="i18n: 'Page'"></span>
+                        <span data-bind="i18n: 'Previous'"></span>
+                    </span>
+                </li>
+
+                <!-- ko foreach: reviewsList.pagination().pages -->
+                <!-- ko ifnot: current -->
+                <!-- ko if: value -->
+                <li class="item">
+                    <span class="page" data-bind="click: $parent.updateReviews.bind($parent,value)">
+                        <span class="label" data-bind="i18n: 'Page'"></span>
+                        <span data-bind="i18n: label"></span>
+                    </span>
+                </li>
+                <!-- /ko -->
+                <!-- /ko -->
+
+                <!-- ko if: current -->
+                <li class="item current">
+                    <strong class="page">
+                        <span class="label" data-bind="i18n: 'Page'"></span>
+                        <span data-bind="i18n: label"></span>
+                    </strong>
+                </li>
+                <!-- /ko -->
+
+                <!-- ko ifnot: value -->
+                <li class="item spacer">
+                    <strong class="page">
+                        <span class="label" data-bind="i18n: 'Page'"></span>
+                        <span data-bind="i18n: label"></span>
+                    </strong>
+                </li>
+                <!-- /ko -->
+
+                <!-- /ko -->
+
+                <li class="item pages-item-next">
+                    <span class="action  next" data-bind="click: updateReviews.bind($data,reviewsList.pagination().nextValue)" title="Next">
+                        <span class="label" data-bind="i18n: 'Page'"></span>
+                        <span data-bind="i18n: 'Next'"></span>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</section>
+
+
+<!--MODAL CONTENT-->
+<section id="modal-filters" class="reviews-filters" style="display: none">
+    <!-- ko if: reviewsList.filters().ratings.enabled && reviewsList.filters().ratings.data.length -->
+    <div class="filters-container">
+        <b data-bind="i18n: 'Filter on review:'"></b>
+        <div class="review-filters">
+            <label for="ratings-filter-all">
+                <input type="checkbox" id="ratings-filter-all" name="ratings" value="all"
+                       data-bind="checked: reviewsList.filters().ratings.allSelected,
+                       click: changeCheckboxStates.bind($data, 'ratings-filter-all')">
+                <span data-bind="i18n: 'All Reviews'"></span>
+            </label>
+            <!-- ko foreach: reviewsList.filters().ratings.data  -->
+            <label data-bind="attr: {'for': 'ratings-filter-'+value}">
+                <input type="checkbox" name="ratings" data-bind="attr: {
+                                'id': 'ratings-filter-'+value,
+                                'value': value
+                            }, checked: selected,
+                            click: $parent.changeCheckboxStates.bind($parent, 'ratings-filter-'+value)">
+                <span class="rating-summary">
+                    <span class="rating-result">
+                        <span class="active-rating" data-bind="style: {width: +value*20 + '%'}"></span>
+                    </span>
+                </span>
+            </label>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <button class="action primary" data-bind="click: updateReviews, i18n: 'Apply filters'"></button>
+</section>
+<!---->

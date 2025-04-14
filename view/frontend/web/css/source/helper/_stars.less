@@ -1,0 +1,35 @@
+& when (@media-common = true) {
+    [data-element*="shopreviews-connect-textual-widget"] [data-element="box-stars"],
+    [data-element*="shopreviews-connect-textual-reviews"] [data-element="box-stars"],
+    [data-element*="shopreviews-connect-badge-reviews"] [data-element="box-stars"],
+    [data-element*="shopreviews-connect-carousel-widget"] [data-element="box-stars"] {
+        .shopreviews-connect-widget-variables();
+
+        position: relative;
+        display: inline-flex;
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .filled {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+
+            > div {
+                display: inline-flex;
+                color: @star-filled;
+            }
+        }
+
+        .empty {
+            display: inline-flex;
+            color: @star-empty;
+        }
+    }
+}

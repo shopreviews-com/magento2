@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright © Shopreviews.eu. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Shopreviews\Connect\Api\Selftest\RepositoryInterface" type="Shopreviews\Connect\Model\Selftest\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Config\RepositoryInterface" type="Shopreviews\Connect\Model\Config\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Log\RepositoryInterface" type="Shopreviews\Connect\Model\Log\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Request\RepositoryInterface" type="Shopreviews\Connect\Model\Request\Repository"/>
+
+    <preference for="Shopreviews\Connect\Api\Review\RepositoryInterface" type="Shopreviews\Connect\Model\Review\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Review\DataInterface" type="Shopreviews\Connect\Model\Review\Data"/>
+    <preference for="Shopreviews\Connect\Api\Review\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Shopreviews\Connect\Api\Website\RepositoryInterface" type="Shopreviews\Connect\Model\Website\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Website\DataInterface" type="Shopreviews\Connect\Model\Website\Data"/>
+
+    <preference for="Shopreviews\Connect\Api\Source\RepositoryInterface" type="Shopreviews\Connect\Model\Source\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Source\DataInterface" type="Shopreviews\Connect\Model\Source\Data"/>
+
+    <preference for="Shopreviews\Connect\Api\Platform\RepositoryInterface" type="Shopreviews\Connect\Model\Platform\Repository"/>
+    <preference for="Shopreviews\Connect\Api\Platform\DataInterface" type="Shopreviews\Connect\Model\Platform\Data"/>
+
+    <preference for="Shopreviews\Connect\Api\Service\RatingDataInterface" type="Shopreviews\Connect\Service\Api\RatingInfo"/>
+
+    <type name="Shopreviews\Connect\Model\Selftest\Repository">
+        <arguments>
+            <argument name="testList" xsi:type="array">
+                <item name="phpVersion" xsi:type="object">Shopreviews\Connect\Service\Test\PhpVersion</item>
+                <item name="extensionStatus" xsi:type="object">Shopreviews\Connect\Service\Test\ExtensionStatus</item>
+                <item name="extensionVersion" xsi:type="object">Shopreviews\Connect\Service\Test\ExtensionVersion</item>
+                <item name="magentoVersion" xsi:type="object">Shopreviews\Connect\Service\Test\MagentoVersion</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="SRConnectDebugMonolog" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SRConnectDebug</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Shopreviews\Connect\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SRConnectErrorMonolog" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SRConnectError</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="error" xsi:type="object">Shopreviews\Connect\Logger\Handler\Error</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Shopreviews\Connect\Logger\DebugLogger">
+        <arguments>
+            <argument name="logger" xsi:type="object">SRConnectDebugMonolog</argument>
+        </arguments>
+    </type>
+    <type name="Shopreviews\Connect\Logger\ErrorLogger">
+        <arguments>
+            <argument name="logger" xsi:type="object">SRConnectErrorMonolog</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shopreviews_review_listing_data_source" xsi:type="string">Shopreviews\Connect\Model\Review\Grid\Collection</item>
+                <item name="shopreviews_website_listing_data_source" xsi:type="string">Shopreviews\Connect\Model\Website\Grid\Collection</item>
+                <item name="shopreviews_source_listing_data_source" xsi:type="string">Shopreviews\Connect\Model\Source\Grid\Collection</item>
+                <item name="shopreviews_platform_listing_data_source" xsi:type="string">Shopreviews\Connect\Model\Platform\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Shopreviews\Connect\Model\Review\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">shopreviews_review</argument>
+            <argument name="resourceModel" xsi:type="string">Shopreviews\Connect\Model\Review\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Shopreviews\Connect\Model\Website\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">shopreviews_website</argument>
+            <argument name="resourceModel" xsi:type="string">Shopreviews\Connect\Model\Website\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Shopreviews\Connect\Model\Source\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">shopreviews_source</argument>
+            <argument name="resourceModel" xsi:type="string">Shopreviews\Connect\Model\Source\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Shopreviews\Connect\Model\Platform\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">shopreviews_platform</argument>
+            <argument name="resourceModel" xsi:type="string">Shopreviews\Connect\Model\Platform\Collection</argument>
+        </arguments>
+    </type>
+
+    <type name="Shopreviews\RichSnippets\Api\Organization\ServiceInterface">
+        <arguments>
+            <argument name="services" xsi:type="array">
+                <item name="Shopreviews_Connect" xsi:type="object">Shopreviews\Connect\Api\Service\RatingDataInterface</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

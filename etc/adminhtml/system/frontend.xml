@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="frontend" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Shopreviews Overview Page</label>
+        <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Enable</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/frontend/enable</config_path>
+        </field>
+        <field id="url" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>URL Path</label>
+            <config_path>shopreviews_com/frontend/url</config_path>
+            <backend_model>Shopreviews\Connect\Model\Config\Backend\UrlPath</backend_model>
+            <validate>validate-identifier</validate>
+            <comment><![CDATA[Enter the URL path only (without domain). Example: If you enter <code>shopreviews</code>, the URL will be <code>https://example.com/shopreviews</code>.]]></comment>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="website" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Website</label>
+            <source_model>Shopreviews\Connect\Model\Config\Source\Websites</source_model>
+            <config_path>shopreviews_com/frontend/website</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="filter_heading" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Filters</label>
+            <comment>Enable extra filters for the reviews landing page.</comment>
+            <frontend_model>Shopreviews\Connect\Block\Adminhtml\Design\Heading</frontend_model>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="rating_filter" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Rating Filter</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/frontend/rating_filter</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+            <comment>Enabling this option to add a rating filter to the review page.</comment>
+        </field>
+        <field id="year_filter" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Years Filter</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/frontend/year_filter</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+            <comment>Enabling this option to add a date filter to the review page.</comment>
+        </field>
+        <field id="source_filter" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sources Filter</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/frontend/source_filter</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+            <comment>Enabling this option to add a review source filter to the review page.</comment>
+        </field>
+        <field id="layout_heading" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Layout</label>
+            <comment><![CDATA[Configure the layout type and Meta descriptions to perfectly fit your design and SEO needs. The review page will be available on the following URL: {store_url}shopreviews_com/]]>
+            </comment>
+            <frontend_model>Shopreviews\Connect\Block\Adminhtml\Design\Heading</frontend_model>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="meta_title" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Title</label>
+            <config_path>shopreviews_com/frontend/meta_title</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="meta_description" translate="label" type="textarea" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Meta Description</label>
+            <config_path>shopreviews_com/frontend/meta_description</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="meta_keywords" translate="label" type="textarea" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Meta Keywords</label>
+            <config_path>shopreviews_com/frontend/meta_keywords</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="layout_update" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Layout</label>
+            <source_model>Magento\Catalog\Model\Product\Attribute\Source\Layout</source_model>
+            <config_path>shopreviews_com/frontend/layout_update</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="structured_data" translate="label" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Add Google structured data</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/frontend/structured_data</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
+        <field id="page" translate="label" type="text" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Reviews per page</label>
+            <config_path>shopreviews_com/frontend/page</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+            <comment>The paging will be automatically added if the number of reviews is higher.</comment>
+        </field>
+    </group>
+</include>

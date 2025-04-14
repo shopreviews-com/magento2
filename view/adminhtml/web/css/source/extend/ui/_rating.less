@@ -1,0 +1,27 @@
+.shopreviews-rating-box {
+    position: relative;
+    
+    .empty,
+    .filled {
+        display: inline-block;
+        width: 100px;
+        height: 28px;
+        background-repeat: repeat-x;
+        background-size: ~'calc(100% / 5) 100%';
+    }
+
+    .empty {
+        background-image: url('@{baseDir}Shopreviews_Connect/images/svg/star_empty.svg');
+    }
+
+    .filled {
+        background-image: url('@{baseDir}Shopreviews_Connect/images/svg/star_filled.svg');
+    }
+
+    .filled-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+}

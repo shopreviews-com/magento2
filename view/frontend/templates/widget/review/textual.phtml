@@ -1,0 +1,243 @@
+<?php
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Shopreviews\Connect\Block\Widget\Review\Textual $block */
+/** @var Magento\Framework\Escaper $escaper */
+
+$uniqId = $block->getUniqueId();
+$website = $block->getWebsite();
+$fm = $block->formatter();
+if(!$website) { return; }
+?>
+<section data-element="shopreviews-connect-textual-widget-<?= /* @noEscape */$uniqId; ?>">
+    <?php if ($block->showStars()): ?>
+        <b>
+            <?= $block->escapeHtml($website->getAvgRating() . ' / ' . $block->getMaxRating()); ?>
+        </b>
+        <?= $block->getLayout()
+            ->createBlock(Shopreviews\Connect\Block\Widget\Helper\Stars::class)
+            ->setTemplate('Shopreviews_Connect::widget/helper/stars.phtml')
+            ->setData('svgSize', '20')
+            ->setData('percent', $website->getAvgRating() / $block->getMaxRating() * 100)
+            ->toHtml();
+        ?>
+    <?php endif; ?>
+
+    <div class="text">
+        <?php if ($website->getSourceCount()): ?>
+            <?= $escaper->escapeHtml(__(
+                '<b>%1 %2</b> from <b>%3 %4</b>',
+                $website->getReviewCount(),
+                $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+                $website->getSourceCount(),
+                __('sources'),
+            ), ['b']); ?>
+        <?php else: ?>
+            <?= $escaper->escapeHtml(__(
+                '<b>%1 %2</b>',
+                $website->getReviewCount(),
+                $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+            ), ['b']); ?>
+        <?php endif; ?>
+        <?php if ($block->enableModalLink()): ?>
+            <span data-element="link-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3
+                    8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21
+                    3v5.25"/>
+                </svg>
+            </span>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php if ($block->enableModalLink()): ?>
+    <div data-element="shopreviews-connect-textual-reviews-<?= /* @noEscape */$uniqId; ?>"
+         class="<?= /* @noEscape */$block->getModalType(); ?>">
+        <div>
+            <div data-element="reviews-summary">
+                <h2 class="heading">
+                    <?= $escaper->escapeHtml(
+                        __(
+                            '%1 <span>/ %2</span>',
+                            $website->getAvgRating(),
+                            $block->getMaxRating()
+                        ),
+                        ['span']
+                    ); ?>
+                </h2>
+
+                <?= $block->getLayout()
+                    ->createBlock(Shopreviews\Connect\Block\Widget\Helper\Stars::class)
+                    ->setTemplate('Shopreviews_Connect::widget/helper/stars.phtml')
+                    ->setData('svgSize', '40')
+                    ->setData('percent', $website->getAvgRating() / $block->getMaxRating() * 100)
+                    ->toHtml();
+                ?>
+
+                <div data-element="reviews-summary-text">
+                    <?php if ($website->getSourceCount()): ?>
+                        <?= $escaper->escapeHtml(__(
+                            'Based on <b>%1 %2</b> from <b>%3 %4</b>',
+                            $website->getReviewCount(),
+                            $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+                            $website->getSourceCount(),
+                            __('sources'),
+                        ), ['b']); ?>
+                    <?php else: ?>
+                        <?= $escaper->escapeHtml(__(
+                            'Based on <b>%1 %2</b>',
+                            $website->getReviewCount(),
+                            $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+                        ), ['b']); ?>
+                    <?php endif; ?>
+                </div>
+
+                <span data-element="close">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                    </svg>
+                </span>
+            </div>
+
+            <?php if ($website->getSourceCount() > 1): ?>
+                <div data-element="reviews-tab">
+                    <?php /** @var \Shopreviews\Connect\Api\Source\DataInterface $source */ ?>
+                    <?php foreach ($block->getSources() as $source): ?>
+                        <div class="tab" data-tab="<?= $escaper->escapeHtml($source->getPlatformName()); ?>">
+                            <img src="<?= $escaper->escapeUrl($block->getMediaImageUrl($source->getPlatformLogo())) ?>"
+                                 alt="<?= $escaper->escapeHtml($source->getPlatformName()); ?>"/>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <div data-element="reviews">
+                <?php /** @var \Shopreviews\Connect\Api\Review\DataInterface $review */ ?>
+                <?php foreach ($block->getReviews() as $review): ?>
+                    <div data-element="review-item"
+                         data-platform="<?= $escaper->escapeHtml($review->getPlatformName()); ?>" class="show">
+                        <div class="top">
+                            <?= $block->getLayout()
+                                ->createBlock(Shopreviews\Connect\Block\Widget\Helper\Stars::class)
+                                ->setTemplate('Shopreviews_Connect::widget/helper/stars.phtml')
+                                ->setData('svgSize', '22')
+                                ->setData('percent', $review->getRating() / $block->getMaxRating() * 100)
+                                ->toHtml();
+                            ?>
+                            <span class="name">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="size-6">
+                                    <path fill-rule="evenodd"
+                                          d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1
+                                          16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786
+                                          0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span>
+                                    <?= $escaper->escapeHtml($review->getName()) ?>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="comment">
+                            <?= $escaper->escapeHtml($review->getDescription()) ?>
+                        </div>
+                        <div class="bottom">
+                            <span class="platform">
+                                <span class="icon">
+                                    <?php $icon = $block->getMediaImageUrl($review->getPlatformIcon()); ?>
+                                    <img src="<?= $escaper->escapeUrl($icon); ?>"
+                                         alt="<?= $escaper->escapeHtml($review->getPlatformName()); ?>"
+                                         width="20" height="20"/>
+                                </span>
+                                <?= $escaper->escapeHtml(__(
+                                    '<b>From:</b> <i>%1</i>',
+                                    $review->getPlatformName()
+                                ), ['b', 'i']); ?>
+                            </span>
+                            <span class="date">
+                                <?= $escaper->escapeHtml($fm->date($review->getReviewDate())); ?>
+                            </span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <span data-element="shopreviews-connect-textual-overlay-<?= /* @noEscape */$uniqId; ?>"></span>
+
+    <script>
+        const <?= /* @noEscape */ 'TextualWidget_' . $uniqId ?> = {
+            badge: document.querySelector(
+                '[data-element="shopreviews-connect-textual-widget-<?= /* @noEscape */ $uniqId; ?>"]'
+            ),
+            reviews: document.querySelector(
+                '[data-element="shopreviews-connect-textual-reviews-<?= /* @noEscape */ $uniqId; ?>"]'
+            ),
+            close: document.querySelector(
+                '[data-element="shopreviews-connect-textual-reviews-<?= /* @noEscape */ $uniqId; ?>"] ' +
+                '[data-element="close"]'
+            ),
+            overlay: document.querySelector(
+                '[data-element="shopreviews-connect-textual-overlay-<?= /* @noEscape */ $uniqId; ?>"]'
+            ),
+            tabs: document.querySelector(
+                '[data-element="shopreviews-connect-textual-reviews-<?= /* @noEscape */ $uniqId; ?>"] ' +
+                '[data-element="reviews-tab"]'
+            ),
+
+            init() {
+                this.badge.addEventListener('click', () => this.reviews.classList.add('show'));
+                this.close.addEventListener('click', () => this.reviews.classList.remove('show'));
+                this.overlay.addEventListener('click', () => this.reviews.classList.remove('show'));
+
+                // Tabs event
+                this.tabs.addEventListener('click', (e) => {
+                    if (e.target.closest('.tab')) {
+                        const tab = e.target.closest('.tab');
+                        const platform = tab.getAttribute('data-tab');
+
+                        if (tab.classList.contains('active')) {
+                            tab.classList.remove('active');
+                            this.showPlatformReviews();
+                        } else {
+                            const activeTabs = Array.from(this.tabs.querySelectorAll('.active'));
+
+                            if (activeTabs.length > 0) {
+                                activeTabs.forEach((item) => item.classList.remove('active'));
+                            }
+
+                            tab.classList.add('active');
+                            this.showPlatformReviews(platform);
+                        }
+                    }
+                });
+            },
+
+            showPlatformReviews(platform = '') {
+                const reviews = Array.from(this.reviews.querySelectorAll('[data-element="review-item"]'));
+
+                if (reviews) {
+                    if (!platform) {
+                        reviews.forEach((item) => item.classList.add('show'));
+                    } else {
+                        reviews.forEach((item) => {
+                            if (item.getAttribute('data-platform') === platform) {
+                                item.classList.add('show');
+                            } else {
+                                item.classList.remove('show');
+                            }
+                        });
+                    }
+                }
+            }
+        };
+
+        <?= /* @noEscape */ 'TextualWidget_' . $uniqId ?>.init();
+    </script>
+<?php endif; ?>

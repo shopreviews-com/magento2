@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <shopreviews_com>
+            <general>
+                <version>1.0.0</version>
+                <enable>0</enable>
+                <debug>0</debug>
+            </general>
+            <connection>
+                <company_uuid/>
+                <access_token/>
+                <refresh_token/>
+                <token_created_at/>
+                <token_expire_at/>
+                <app_name/>
+                <platform_token/>
+            </connection>
+            <frontend>
+                <rating_values>1,2,3,4,5</rating_values>
+                <rating_filter>1</rating_filter>
+                <year_filter>1</year_filter>
+                <source_filter>1</source_filter>
+                <meta_title>All Our Reviews</meta_title>
+                <page>25</page>
+                <url>our-shopreviews.html</url>
+            </frontend>
+        </shopreviews_com>
+    </default>
+</config>

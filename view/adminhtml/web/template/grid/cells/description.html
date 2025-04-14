@@ -1,0 +1,52 @@
+<div class="description">
+    <div>
+        <span data-bind="html: $col.getDescription($row())"></span>
+        <span class="action" data-bind="click: showInfo">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </div>
+
+    <div class="additional-info">
+        <header>
+            <img data-bind="attr: { src: require.toUrl('Shopreviews_Connect/images/shopreviews_logo_big.png') }" alt="Shopreviews logo" width="150" height="28" />
+            <span data-bind="i18n: 'Reviews Data'"></span>
+        </header>
+        <div class="box">
+            <table>
+                <tr>
+                    <td data-bind="i18n: 'ID'"></td>
+                    <td data-bind="text: $col.getId($row())"></td>
+                </tr>
+                <tr>
+                    <td data-bind="i18n: 'Name'"></td>
+                    <td data-bind="text: $col.getName($row())"></td>
+                </tr>
+                <tr>
+                    <td data-bind="i18n: 'Rating'"></td>
+                    <td>
+                        <div class="shopreviews-rating-box">
+                            <span class="empty"></span>
+                            <span class="filled-wrapper" data-bind="style: { width: $col.getRating($row()) }">
+                                <span class="filled"></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-bind="i18n: 'Platform'"></td>
+                    <td data-bind="text: $col.getPlatform($row())"></td>
+                </tr>
+                <tr>
+                    <td data-bind="i18n: 'Date'"></td>
+                    <td data-bind="text: $col.getDate($row())"></td>
+                </tr>
+                <tr>
+                    <td data-bind="i18n: 'Description'"></td>
+                    <td data-bind="text: $col.getDescription($row())"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

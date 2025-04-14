@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © Shopreviews. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Shopreviews\Connect\Block\Adminhtml\Design\Header;
+
+/**
+ * @see Header
+ * @var Header $block
+ */
+
+$logo = $block->getViewFileUrl('Shopreviews_Connect::images/shopreviews_logo_big.png');
+?>
+
+<div class="mm-ui-header">
+    <div class="box">
+        <strong class="title">
+            <?= $block->escapeHtml(__('Centralize Your Shopreviews')); ?>
+        </strong>
+        <p>
+            <?= $block->escapeHtml(__('All your shopreviews in one widget Effortlessly collect and manage all of your shopping reviews from various platforms, Google, and marketplaces with just a few clicks and display them in centralized widgets.')); ?>
+        </p>
+        <div class="links">
+            <a class="website" href="https://app.shopreviews.com/dashboard" target="_blank">
+                <?= $block->escapeHtml(__('Dashboard')); ?>
+            </a>
+            <a class="support" href="mailto:hello@shopreviews.com">
+                <?= $block->escapeHtml(__('Support')); ?>
+            </a>
+            <a class="docs" href="https://shopreviews.com/docs/" target="_blank">
+                <?= $block->escapeHtml(__('Docs')); ?>
+            </a>
+        </div>
+    </div>
+
+    <img src="<?= $block->escapeUrl($logo) ?>" alt="Shopreviews logo" width="240" height="44" />
+</div>

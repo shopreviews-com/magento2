@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © Shopreviews. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Shopreviews\Connect\Block\Adminhtml\Config\Button\VersionCheck;
+
+/**
+ * @var VersionCheck $block
+ */
+?>
+<div class="mm-ui-result_version-wrapper"
+     data-mm-ui-endpoint-url="<?= $block->escapeUrl($block->getVersionCheckUrl()) ?>">
+    <span><?= $block->escapeHtml($block->getVersion()); ?></span>
+</div>

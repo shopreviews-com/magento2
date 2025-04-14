@@ -1,0 +1,105 @@
+form[action*="shopreviews_com"] {
+	.shopreviews-variables();
+
+	.mm-ui-result_version-wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin-top: -1.3rem;
+		margin-bottom: -.3rem;
+
+		.loading-mask {
+			&~.button-wrapper {
+				display: none;
+			}
+
+			&~span {
+				margin-top: 1rem;
+			}
+
+			&~#mm-result_version {
+				position: relative;
+			}
+		}
+
+		.button-wrapper {
+			position: relative;
+			margin-left: 15px;
+
+			button[id*="_version"] {
+				padding-left: 35px;
+
+				svg,
+				path {
+					transition: .3s;
+				}
+
+				&:hover~svg {
+					background-color: @mm-ui-color2;
+
+					path {
+						fill: @mm-ui-color5;
+					}
+				}
+			}
+
+			svg {
+				position: absolute;
+				top: 7px;
+				left: 10px;
+				width: 8px;
+				height: 8px;
+				padding: 5px;
+
+				background-color: @mm-ui-color5;
+				border-radius: 50%;
+				pointer-events: none;
+				transition: .3s;
+			}
+		}
+
+		.loading-mask,
+		.popup-loading {
+			position: absolute;
+			padding: 0;
+			height: 100%;
+			top: 0;
+			left: 0;
+			width: 100%;
+			margin: 0;
+		}
+
+		.loading-mask {
+			height: 200%;
+			top: -50%;
+		}
+
+		.popup-loading:after {
+			margin: 0;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+		}
+	}
+
+	.mm-ui-version {
+		white-space: nowrap;
+		position: relative;
+		top: 5px;
+		padding: 1.2rem 1.6rem;
+		border: 1px solid @mm-ui-color1;
+		border-radius: 6px;
+		background-color: @mm-ui-color2;
+		margin-left: 15px;
+		font-weight: 500;
+
+
+		span {
+			color: @mm-ui-color6;
+		}
+	}
+}

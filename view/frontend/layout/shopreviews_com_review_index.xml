@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column">
+    <body>
+        <referenceBlock name="head.additional">
+            <block name="shopreviews.header" class="Magento\Framework\View\Element\Template" before="-" template="Shopreviews_Connect::header.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Shopreviews\Connect\ViewModel\Header</argument>
+                    <argument name="data_model" xsi:type="object">Shopreviews\Connect\ViewModel\Reviews</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceContainer name="content">
+            <block name="shopreviews.reviews" class="Magento\Framework\View\Element\Template" template="Shopreviews_Connect::reviews.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Shopreviews\Connect\ViewModel\Reviews</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

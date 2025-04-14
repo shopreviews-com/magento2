@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright © Magmodules.eu. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                shopreviews_review_listing.shopreviews_review_listing_data_source
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>shopreviews_review_columns</spinner>
+        <deps>
+            <dep>shopreviews_review_listing.shopreviews_review_listing_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="sync" class="Shopreviews\Connect\Block\Adminhtml\Grid\Review\SyncButton"/>
+        </buttons>
+    </settings>
+    <dataSource name="shopreviews_review_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Shopreviews_Connect::review_listing</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="shopreviews_review_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <columnsControls name="columns_controls"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <settings>
+                <noItemsMsg>You haven’t selected any reviews!</noItemsMsg>
+            </settings>
+            <action name="delete">
+                <settings>
+                    <type>delete</type>
+                    <label>Delete</label>
+                    <url path="shopreviews/review/massDelete"/>
+                    <confirm>
+                        <title translate="true">Delete items</title>
+                        <message translate="true">Are you sure you want to delete selected reviews?</message>
+                    </confirm>
+                </settings>
+            </action>
+        </massaction>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+    <columns name="shopreviews_review_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="review_uuid">
+            <settings>
+                <visible>false</visible>
+                <filter>textRange</filter>
+                <label translate="true">UUID</label>
+            </settings>
+        </column>
+        <column name="platform_uuid" class="Shopreviews\Connect\Ui\Component\Listing\Columns\Platform" component="Shopreviews_Connect/js/grid/columns/icon">
+            <settings>
+                <options class="Shopreviews\Connect\Service\Platform\Source"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Platform</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="description" class="Shopreviews\Connect\Ui\Component\Listing\Columns\Truncate" component="Shopreviews_Connect/js/grid/columns/description">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Review Body</label>
+            </settings>
+        </column>
+        <column name="rating" component="Shopreviews_Connect/js/grid/columns/rating">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Rating</label>
+            </settings>
+        </column>
+        <column name="review_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Review Date</label>
+                <sorting>desc</sorting>
+                <timezone>false</timezone>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Shopreviews\Connect\Ui\Component\Listing\Columns\Actions">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>90</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

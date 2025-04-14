@@ -1,0 +1,72 @@
+form[action*="shopreviews_com"] {
+	.shopreviews-variables();
+
+	.mm-ui-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+		padding: 24px;
+
+		border-radius: 16px;
+		background: @shopreviews-gradient;
+		box-shadow: @shopreviews-box-shadow;
+
+		.box {
+			max-width: 650px;
+			font-size: 1.3rem;
+			line-height: 2.2rem;
+		}
+
+		.title {
+			display: block;
+			margin-bottom: 12px;
+			font-size: 1.5rem;
+		}
+
+		.links {
+			display: flex;
+			gap: 28px;
+			margin-top: 20px;
+		}
+
+		a {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			text-decoration: none;
+
+			&::before {
+				content: '';
+
+				display: inline-block;
+				width: 18px;
+				height: 18px;
+			}
+
+			&.website {
+				color: @mm-ui-color4;
+
+				&::before {
+					background-image: url('@{baseDir}Shopreviews_Connect/images/svg/globe.svg');
+				}
+			}
+
+			&.support {
+				color: @mm-ui-color6;
+
+				&::before {
+					background-image: url('@{baseDir}Shopreviews_Connect/images/svg/envelope.svg');
+				}
+			}
+
+			&.docs {
+				color: @mm-ui-color5;
+
+				&::before {
+					background-image: url('@{baseDir}Shopreviews_Connect/images/svg/bookmark.svg');
+				}
+			}
+		}
+	}
+}

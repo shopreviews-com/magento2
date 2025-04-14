@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright © Magmodules.eu. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Shopreviews_Connect::config" title="Shopreviews.com" sortOrder="10"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Shopreviews_Connect::base" sortOrder="200" title="Shopreviews.com">
+                    <resource id="Shopreviews_Connect::data" sortOrder="10" title="Data">
+                        <resource id="Shopreviews_Connect::review_listing" sortOrder="20" title="Reviews"/>
+                        <resource id="Shopreviews_Connect::source_listing" sortOrder="30" title="Sources"/>
+                        <resource id="Shopreviews_Connect::platform_listing" sortOrder="30" title="Platforms"/>
+                        <resource id="Shopreviews_Connect::website_listing" sortOrder="30" title="Websites"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

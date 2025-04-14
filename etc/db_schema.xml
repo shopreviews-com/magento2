@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright © Magmodules.eu. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Declaration Schema of Shopreviews Review Table -->
+    <table name="shopreviews_review" engine="innodb" resource="default" comment="Shopreviews Review Table">
+        <column name="entity_id" xsi:type="int" padding="10" identity="true" nullable="false" unsigned="true" comment="Entity ID"/>
+        <column name="review_uuid" xsi:type="varchar" length="36" nullable="false" comment="Review uuid"/>
+        <column name="source_uuid" xsi:type="varchar" length="36" nullable="false" comment="Source Uuid"/>
+        <column name="platform_uuid" xsi:type="varchar" length="36" nullable="false" comment="Platform Uuid"/>
+        <column name="company_uuid" xsi:type="varchar" length="36" nullable="true" comment="Company Uuid"/>
+        <column name="name" xsi:type="varchar" length="100" nullable="true" comment="Name"/>
+        <column name="email" xsi:type="varchar" length="100" nullable="true" comment="Email"/>
+        <column name="description" xsi:type="text" nullable="true" comment="Description"/>
+        <column name="rating" xsi:type="int" padding="10" nullable="false" unsigned="true" comment="Review Rating"/>
+        <column name="locale_code" xsi:type="varchar" length="50" nullable="true" comment="Locale Code"/>
+        <column name="review_date" xsi:type="timestamp" on_update="false" default="CURRENT_TIMESTAMP" comment="Review date"/>
+        <column name="fetched_at" xsi:type="timestamp" on_update="true" default="CURRENT_TIMESTAMP" comment="Fetched at"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="SHOPREVIEWS_REVIEW_REVIEW_UUID" indexType="btree">
+            <column name="review_uuid"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="SHOPREVIEWS_REVIEW_PLATFORM_UUID_PLATFORM_UUID"
+                    table="shopreviews_review" column="platform_uuid"
+                    referenceTable="shopreviews_platform" referenceColumn="platform_uuid"
+                    onDelete="CASCADE"
+        />
+        <constraint xsi:type="foreign" referenceId="SHOPREVIEWS_REVIEW_SOURCE_UUID_SOURCE_UUID"
+                    table="shopreviews_review" column="source_uuid"
+                    referenceTable="shopreviews_source" referenceColumn="source_uuid"
+                    onDelete="CASCADE"
+        />
+    </table>
+
+    <!-- Declaration Schema of Shopreviews Websites Table -->
+    <table name="shopreviews_website" engine="innodb" resource="default" comment="Shopreviews Website Table">
+        <column name="entity_id" xsi:type="int" padding="10" identity="true" nullable="false" unsigned="true" comment="Entity ID"/>
+        <column name="website_uuid" xsi:type="varchar" length="36" nullable="false" comment="Website uuid"/>
+        <column name="company_uuid" xsi:type="varchar" length="36" nullable="true" comment="Company Uuid"/>
+        <column name="name" xsi:type="varchar" length="100" nullable="true" comment="Name"/>
+        <column name="logo_url" xsi:type="varchar" length="255" nullable="true" comment="Logo Url"/>
+        <column name="details" xsi:type="varchar" length="255" nullable="true" comment="Details"/>
+        <column name="review_count" xsi:type="int" padding="10" nullable="false" unsigned="true" comment="Review Count"/>
+        <column name="avg_rating" xsi:type="decimal" precision="10" scale="2" nullable="true" comment="Average Rating"/>
+        <column name="source_count" xsi:type="int" padding="10" nullable="false" unsigned="true" comment="Sources Count"/>
+        <column name="best_rating" xsi:type="smallint" nullable="false" default="5" unsigned="true" comment="Best Rating"/>
+        <column name="worst_rating" xsi:type="smallint"  nullable="false" default="0" unsigned="true" comment="Worst Rating"/>
+        <column name="is_active" xsi:type="int" padding="2" nullable="false" unsigned="true" comment="Is Active"/>
+        <column name="score_summary" xsi:type="text"  nullable="true" comment="Score Summary"/>
+        <column name="platform_created_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Created at"/>
+        <column name="platform_updated_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Updated at"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="SHOPREVIEWS_WEBSITE_WEBSITE_UUID" indexType="btree">
+            <column name="website_uuid"/>
+        </index>
+    </table>
+
+    <!-- Declaration Schema of Shopreviews Source Table -->
+    <table name="shopreviews_source" engine="innodb" resource="default" comment="Shopreviews Source Table">
+        <column name="entity_id" xsi:type="int" padding="10" identity="true" nullable="false" unsigned="true" comment="Entity ID"/>
+        <column name="source_uuid" xsi:type="varchar" length="36" nullable="false" comment="Source Uuid"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="true" comment="Name"/>
+        <column name="logo_url" xsi:type="varchar" length="255" nullable="true" comment="Logo Url"/>
+        <column name="url" xsi:type="varchar" length="255" nullable="true" comment="Url"/>
+        <column name="review_link" xsi:type="varchar" length="255" nullable="true" comment="Review Link"/>
+        <column name="company_uuid" xsi:type="varchar" length="36" nullable="true" comment="Company Uuid"/>
+        <column name="platform_uuid" xsi:type="varchar" length="36" nullable="true" comment="Platform Uuid"/>
+        <column name="website_uuids" xsi:type="varchar" length="255" nullable="true" comment="Website Uuids"/>
+        <column name="review_count" xsi:type="int" padding="10" nullable="false" unsigned="true" comment="Review Count"/>
+        <column name="avg_rating" xsi:type="decimal" precision="10" scale="2" nullable="true" comment="Average Rating"/>
+        <column name="last_sync_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Last Synced at"/>
+        <column name="next_sync_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Next Sync at"/>
+        <column name="platform_created_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Created at"/>
+        <column name="platform_updated_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Updated at"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="SHOPREVIEWS_SOURCE_SOURCE_UUID" indexType="btree">
+            <column name="source_uuid"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="SHOPREVIEWS_SOURCE_PLATFORM_UUID_PLATFORM_UUID"
+            table="shopreviews_source" column="platform_uuid"
+            referenceTable="shopreviews_platform" referenceColumn="platform_uuid"
+            onDelete="SET NULL"
+        />
+    </table>
+
+    <!-- Declaration Schema of Shopreviews Platform Table -->
+    <table name="shopreviews_platform" engine="innodb" resource="default" comment="Shopreviews Website Table">
+        <column name="entity_id" xsi:type="int" padding="10" identity="true" nullable="false" unsigned="true" comment="Entity ID"/>
+        <column name="platform_uuid" xsi:type="varchar" length="36" nullable="false" comment="Platform Uuid"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="true" comment="Name"/>
+        <column name="logo" xsi:type="varchar" length="255" nullable="true" comment="Logo"/>
+        <column name="logo_icon" xsi:type="varchar" length="100" nullable="true" comment="Logo Icon"/>
+        <column name="is_active" xsi:type="int" padding="2" nullable="false" unsigned="true" comment="Is Active"/>
+        <column name="platform_created_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Created at"/>
+        <column name="platform_updated_at" xsi:type="timestamp" on_update="false" nullable="true" comment="Updated at"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="SHOPREVIEWS_PLATFORM_PLATFORM_UUID" indexType="btree">
+            <column name="platform_uuid"/>
+        </index>
+    </table>
+
+</schema>

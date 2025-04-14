@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Shopreviews\Connect\Block\Widget\Review\Carousel $block */
+/** @var Magento\Framework\Escaper $escaper */
+
+$uniqId = $block->getUniqueId();
+$website = $block->getWebsite();
+$fm = $block->formatter();
+if(!$website) { return; }
+?>
+
+<section data-element="shopreviews-connect-carousel-widget-<?= /* @noEscape */$uniqId; ?>"
+         class="<?= /* @noEscape */$block->getSectionClass() ?>">
+
+    <?php if ($block->showReviewSummary()): ?>
+        <div class="total-summary">
+            <div class="rating">
+                <?= $escaper->escapeHtml(__(
+                    '%1 <span>/ %2</span>',
+                    $website->getAvgRating(),
+                    '5'
+                ), ['span']); ?>
+            </div>
+            <?= $block->getLayout()
+                ->createBlock(Shopreviews\Connect\Block\Widget\Helper\Stars::class)
+                ->setTemplate('Shopreviews_Connect::widget/helper/stars.phtml')
+                ->setData('svgSize', '40')
+                ->setData('percent', $website->getAvgRating() * 20)
+                ->toHtml();
+            ?>
+
+            <div class="text">
+                <?php if ($website->getSourceCount()): ?>
+                    <?= $escaper->escapeHtml(__(
+                        'Based on <b>%1 %2</b> from <b>%3 %4</b>',
+                        $website->getReviewCount(),
+                        $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+                        $website->getSourceCount(),
+                        __('sources'),
+                    ), ['b']); ?>
+                <?php else: ?>
+                    <?= $escaper->escapeHtml(__(
+                        'Based on <b>%1 %2</b>',
+                        $website->getReviewCount(),
+                        $website->getReviewCount() > 1 ? __('reviews') : __('review'),
+                    ), ['b']); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="reviews-slider <?= $block->showArrows() ? '' : 'no-arrows'; ?>">
+        <?php /** @var Shopreviews\Connect\Api\Review\DataInterface $review */ ?>
+        <?php foreach ($block->getReviews() as $review): ?>
+            <div>
+                <div class="item">
+                    <div class="top">
+                        <?= $block->getLayout()
+                            ->createBlock(Shopreviews\Connect\Block\Widget\Helper\Stars::class)
+                            ->setTemplate('Shopreviews_Connect::widget/helper/stars.phtml')
+                            ->setData('svgSize', '18')
+                            ->setData('percent', $review->getRating() * 20)
+                            ->toHtml();
+                        ?>
+                        <span class="name">
+                            <?= $escaper->escapeHtml($review->getName()) ?>
+                        </span>
+                    </div>
+                    <div class="comment <?= $escaper->escapeHtml($block->getTextLength()); ?>">
+                        <?= $escaper->escapeHtml($review->getDescription()) ?>
+                    </div>
+                    <div class="bottom">
+                        <span class="platform">
+                            <?php $icon = $block->getMediaImageUrl($review->getPlatformIcon()); ?>
+                            <img src="<?= $escaper->escapeUrl($icon); ?>"
+                                  alt="<?= $escaper->escapeHtml($review->getPlatformName()); ?>"
+                                 width="20" height="20"/>
+                        </span>
+                        <span class="date">
+                            <?= $escaper->escapeHtml($fm->date($review->getReviewDate())); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<script type="text/x-magento-init">
+    {
+        "[data-element=shopreviews-connect-carousel-widget-<?= /* @noEscape */$uniqId; ?>] .reviews-slider": {
+            "slick":<?= /* @noEscape */$block->getSlickConfig(); ?>}
+}
+</script>

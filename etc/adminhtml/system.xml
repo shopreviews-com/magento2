@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © South Pole. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="shopreviews" translate="label" sortOrder="500" class="shopreviews-extensions">
+            <label>Shopreviews.com</label>
+        </tab>
+        <section id="shopreviews_com" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>General</label>
+            <tab>shopreviews</tab>
+            <resource>Shopreviews_Connect::config</resource>
+            <include path="Shopreviews_Connect::system/branding.xml"/>
+            <include path="Shopreviews_Connect::system/general.xml"/>
+            <include path="Shopreviews_Connect::system/frontend.xml"/>
+            <include path="Shopreviews_Connect::system/debug.xml"/>
+        </section>
+    </system>
+</config>

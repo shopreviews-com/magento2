@@ -1,0 +1,89 @@
+.shopreviews-modal {
+    .shopreviews-variables();
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+    transform: translate(-50%, 250%);
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: ~'calc(100% - 40px)';
+    max-width: 768px;
+
+    border-radius: 16px;
+    box-sizing: border-box;
+    box-shadow: @shopreviews-box-shadow;
+    transition: .7s;
+
+    &.show {
+        transform: translate(-50%, -50%);
+
+        & ~ .shopreviews-modal-overlay {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .shopreviews-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 32px; 
+        background: @color-white;
+    }
+
+    .shopreviews-modal-title {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 0;
+
+        color: @mm-ui-color5;
+        font-size: 22px;
+        font-weight: 600;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            background: @mm-ui-color4;
+        }
+    }
+
+    .shopreviews-modal-box-subheader {
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .shopreviews-modal-box {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        height: 100%;
+        padding: 28px 32px;
+        overflow: auto;
+        background-image: @shopreviews-gradient;
+        line-height: 24px;
+    }
+
+    .shopreviews-modal-box-content {
+        padding: 0 40px;
+    }
+}
+
+.shopreviews-modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    background: fade(@color-black, 15%);
+    transition: .5s;
+}

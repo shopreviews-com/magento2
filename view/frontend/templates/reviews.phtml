@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Magento\Framework\View\Element\Template $block */
+/** @var Shopreviews\Connect\ViewModel\Reviews $viewModel */
+/** @var Magento\Framework\Escaper $escaper */
+$viewModel = $block->getViewModel();
+if (!$viewModel->isEnabled()) { echo 'Not enabled'; return; }
+?>
+<div id="block-loader-id" data-role="abc-loader" class="loading-mask"
+     data-mage-init='{"Shopreviews_Connect/js/loader": {}}'>
+    <div class="loader">
+        <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('images/loader-1.gif')) ?>"
+             alt="<?= $escaper->escapeHtml(__('Loading...')) ?>" style="position: absolute;">
+    </div>
+</div>
+
+<?php
+$filters = $viewModel->serializeData($viewModel->getEnabledFilters());
+$reviews = $viewModel->serializeData($viewModel->getReviews());
+$pagination = $viewModel->serializeData($viewModel->getPaginationData());
+$summary = $viewModel->serializeData($viewModel->getReviewsSummary());
+?>
+<div id="shopreviews" class="shopreviews-content-wrapper" data-bind="scope:'reviews'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+       {
+           "#shopreviews": {
+               "Magento_Ui/js/core/app": {
+                   "components":{
+                       "reviews":{
+                           "component": "Shopreviews_Connect/js/reviews",
+                           "reviews": {
+                               "filters": <?= /* @noEscape */ $filters; ?>,
+                               "data": <?= /* @noEscape */ $reviews; ?>,
+                               "pagination": <?= /* @noEscape */ $pagination; ?>,
+                               "summary": <?= /* @noEscape */ $summary; ?>
+                           }
+                       }
+                   }
+               }
+           }
+       }
+   </script>
+</div>

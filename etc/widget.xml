@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © Magmodules.eu. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+
+    <!-- Textual Box Widget -->
+    <widget class="Shopreviews\Connect\Block\Widget\Review\Textual" id="shopreviews_com_textual_widget">
+        <label>Shopreviews-com Textual Box Widget</label>
+        <description>Shopreviews-com Textual Box Widget</description>
+        <parameters>
+            <parameter name="website" xsi:type="select" visible="true" required="false" sort_order="10" source_model="Shopreviews\Connect\Model\Config\Source\Websites">
+                <label translate="true">Website(s)</label>
+            </parameter>
+            <parameter name="show_stars" xsi:type="select" visible="true" required="false" sort_order="20" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Stars</label>
+            </parameter>
+            <parameter name="enable_modal_link" xsi:type="select" visible="true" required="false" sort_order="30" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Modal Link</label>
+            </parameter>
+            <parameter name="modal_type" xsi:type="select" visible="true" required="false" sort_order="40" source_model="Shopreviews\Connect\Model\Config\Source\ModelType">
+                <label translate="true">Modal Type</label>
+                <depends>
+                    <parameter name="enable_modal_link" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="max_reviews_number" xsi:type="text" visible="true" required="false" sort_order="45">
+                <label translate="true">Maximum Number of Reviews</label>
+                <depends>
+                    <parameter name="enable_modal_link" value="1" />
+                </depends>
+                <value>10</value>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <!-- Carousel Widget -->
+    <widget class="Shopreviews\Connect\Block\Widget\Review\Carousel" id="shopreviews_com_carousel_widget">
+        <label>Shopreviews-com Carousel Widget</label>
+        <description>Shopreviews-com Carousel Widget</description>
+        <parameters>
+            <parameter name="website" xsi:type="select" visible="true" required="false" sort_order="10" source_model="Shopreviews\Connect\Model\Config\Source\Websites">
+                <label translate="true">Website(s)</label>
+            </parameter>
+            <parameter name="show_review_summary" xsi:type="select" visible="true" required="false" sort_order="15" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Review Summary</label>
+                <depends>
+                    <parameter name="full_width" value="0" />
+                </depends>
+            </parameter>
+            <parameter name="show_sources" xsi:type="select" visible="true" required="false" sort_order="20" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Sources</label>
+                <depends>
+                    <parameter name="full_width" value="0" />
+                    <parameter name="show_review_summary" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="full_width" xsi:type="select" visible="true" required="false" sort_order="25">
+                <label translate="true">Full width</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="autoplay" xsi:type="select" visible="true" required="false" sort_order="30" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Autoplay</label>
+            </parameter>
+            <parameter name="show_arrows" xsi:type="select" visible="true" required="false" sort_order="35" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Arrows</label>
+            </parameter>
+            <parameter name="show_dots" xsi:type="select" visible="true" required="false" sort_order="40" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Dots</label>
+            </parameter>
+            <parameter name="max_reviews_number" xsi:type="text" visible="true" required="false" sort_order="45">
+                <label translate="true">Total Number of Review slides</label>
+                <value>10</value>
+            </parameter>
+            <parameter name="text_length" xsi:type="select" visible="true" sort_order="50" source_model="Shopreviews\Connect\Model\Config\Source\TextLength">
+                <label translate="true">Review text length</label>
+            </parameter>
+            <parameter name="sort_by" xsi:type="select" visible="true" sort_order="55" source_model="Shopreviews\Connect\Model\Config\Source\SortBy">
+                <label translate="true">Sort by</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <!-- Badge Widget -->
+    <widget class="Shopreviews\Connect\Block\Widget\Review\Badge" id="shopreviews_com_badge_widget">
+        <label>Shopreviews-com Badge Widget</label>
+        <description>Shopreviews-com Badge Widget</description>
+        <parameters>
+            <parameter name="website" xsi:type="select" visible="true" required="false" sort_order="10" source_model="Shopreviews\Connect\Model\Config\Source\Websites">
+                <label translate="true">Website(s)</label>
+            </parameter>
+            <parameter name="badge_location" xsi:type="select" visible="true" required="false" sort_order="20" source_model="Shopreviews\Connect\Model\Config\Source\BadgeLocation">
+                <label translate="true">Badge Location</label>
+            </parameter>
+            <parameter name="show_score" xsi:type="select" visible="true" required="false" sort_order="30" source_model="Shopreviews\Connect\Model\Config\Source\ShowScore">
+                <label translate="true">Show Score</label>
+            </parameter>
+            <parameter name="enable_modal_link" xsi:type="select" visible="true" required="false" sort_order="40" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Modal Link</label>
+            </parameter>
+            <parameter name="modal_type" xsi:type="select" visible="true" required="false" sort_order="50" source_model="Shopreviews\Connect\Model\Config\Source\ModelType">
+                <label translate="true">Modal Type</label>
+                <depends>
+                    <parameter name="enable_modal_link" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="max_reviews_number" xsi:type="text" visible="true" required="false" sort_order="55">
+                <label translate="true">Maximum Number of Reviews in Modal</label>
+                <depends>
+                    <parameter name="enable_modal_link" value="1" />
+                </depends>
+                <value>10</value>
+            </parameter>
+        </parameters>
+    </widget>
+
+</widgets>
