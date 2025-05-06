@@ -10,6 +10,9 @@
 $uniqId = $block->getUniqueId();
 $website = $block->getWebsite();
 $fm = $block->formatter();
+
+$shopreviewsLogo = $block->getViewFileUrl('Shopreviews_Connect::images/shopreviews-logo.png');
+
 if(!$website) { return; }
 ?>
 
@@ -49,6 +52,9 @@ if(!$website) { return; }
                         $website->getReviewCount() > 1 ? __('reviews') : __('review'),
                     ), ['b']); ?>
                 <?php endif; ?>
+            </div>
+            <div class="shopreviews-logo">
+                <img src="<?= $escaper->escapeUrl($shopreviewsLogo) ?>" alt="Shopreview logo" width="158" height="29"/>
             </div>
         </div>
     <?php endif; ?>
