@@ -10,8 +10,12 @@
 $uniqId = $block->getUniqueId();
 $website = $block->getWebsite();
 $fm = $block->formatter();
+
+$shopreviewsLogo = $block->getViewFileUrl('Shopreviews_Connect::images/shopreviews-logo.png');
+
 if(!$website) { return; }
 ?>
+
 <section data-element="shopreviews-connect-textual-widget-<?= /* @noEscape */$uniqId; ?>">
     <?php if ($block->showStars()): ?>
         <b>
@@ -60,6 +64,9 @@ if(!$website) { return; }
          class="<?= /* @noEscape */$block->getModalType(); ?>">
         <div>
             <div data-element="reviews-summary">
+                <div class="shopreviews-logo">
+                    <img src="<?= $escaper->escapeUrl($shopreviewsLogo) ?>" alt="Shopreview logo" width="158" height="29"/>
+                </div>
                 <h2 class="heading">
                     <?= $escaper->escapeHtml(
                         __(

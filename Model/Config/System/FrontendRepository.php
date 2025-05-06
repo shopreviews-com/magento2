@@ -12,7 +12,7 @@ use Shopreviews\Connect\Api\Config\System\FrontendInterface;
 /**
  * Class FrontendRepository
  */
-class FrontendRepository extends BaseRepository implements FrontendInterface
+class FrontendRepository extends AutomationRepository implements FrontendInterface
 {
     /**
      * @inheritDoc

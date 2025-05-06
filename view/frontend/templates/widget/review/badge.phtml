@@ -10,6 +10,9 @@
 $uniqId= $block->getUniqueId();
 $website = $block->getWebsite();
 $fm = $block->formatter();
+
+$shopreviewsLogo = $block->getViewFileUrl('Shopreviews_Connect::images/shopreviews-logo.png');
+
 if(!$website) { return; }
 ?>
 
@@ -40,6 +43,10 @@ if(!$website) { return; }
          class="<?= $escaper->escapeHtml($block->getModalType()); ?>">
         <div>
             <div data-element="reviews-summary">
+                <div class="shopreviews-logo">
+                    <img src="<?= $escaper->escapeUrl($shopreviewsLogo) ?>" alt="Shopreview logo" width="158" height="29"/>
+                </div>
+
                 <h2 class="heading">
                     <?= $escaper->escapeHtml(__(
                         '%1 <span>/ %2</span>',

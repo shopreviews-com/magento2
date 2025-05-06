@@ -44,6 +44,10 @@
             > div {
                 max-height: 100vh;
             }
+
+            .shopreviews-logo {
+                margin-bottom: 24px;
+            }
         }
 
         [data-element="reviews-summary-text"] {
@@ -243,6 +247,12 @@
         &.slideout.show {
             transform: translateX(0);
         }
+
+        .shopreviews-logo img {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+        }
     }
 
     [data-element*="shopreviews-connect-textual-overlay"],
@@ -268,6 +278,17 @@
     [data-element*="shopreviews-connect-badge-reviews"] {
         [data-element="reviews-tab"] {
             display: none;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    [data-element*="shopreviews-connect-textual-reviews"],
+    [data-element*="shopreviews-connect-badge-reviews"] {
+        &.popup {
+            .shopreviews-logo {
+                margin-bottom: 24px;
+            }
         }
     }
 }
