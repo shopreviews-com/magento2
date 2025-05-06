@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="automation" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+        <label>Automation</label>
+        <field id="heading_cron" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Cron</label>
+            <frontend_model>Shopreviews\Connect\Block\Adminhtml\Design\Heading</frontend_model>
+            <comment>The Cronjob is a periodic script which is scheduled to automatically pull new reviews</comment>
+        </field>
+        <field id="cron" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Enable</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>shopreviews_com/automation/cron</config_path>
+        </field>
+        <field id="cron_frequency" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Frequency</label>
+            <source_model>Shopreviews\Connect\Model\Config\Source\CronFrequency</source_model>
+            <backend_model>Shopreviews\Connect\Model\Config\Backend\Cron</backend_model>
+            <config_path>shopreviews_com/automation/cron_frequency</config_path>
+            <depends>
+                <field id="cron">1</field>
+            </depends>
+        </field>
+        <field id="custom_frequency" translate="label comment" type="text" sortOrder="23" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Custom Frequency</label>
+            <config_path>shopreviews_com/automation/cron_frequency</config_path>
+            <depends>
+                <field id="cron">1</field>
+                <field id="cron_frequency">custom</field>
+            </depends>
+            <comment>Enter frequency in Crontab format. E.g. 0 5, 17 * * *  - this will generate the feed at 5AM and 5PM daily.</comment>
+        </field>
+    </group>
+</include>

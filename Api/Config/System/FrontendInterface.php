@@ -11,7 +11,7 @@ namespace Shopreviews\Connect\Api\Config\System;
  * Frontend Settings interface
  * @api
  */
-interface FrontendInterface
+interface FrontendInterface extends AutomationInterface
 {
     public const FRONTEND_ENABLE = 'shopreviews_com/frontend/enable';
     public const WEBSITE = 'shopreviews_com/frontend/website';
