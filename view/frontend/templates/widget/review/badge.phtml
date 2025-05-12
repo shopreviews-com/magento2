@@ -68,7 +68,7 @@ if(!$website) { return; }
                             $website->getReviewCount(),
                             $website->getReviewCount() > 1 ? __('reviews') : __('review'),
                             $website->getSourceCount(),
-                            __('sources'),
+                            $website->getSourceCount() > 1 ? __('sources') : __('source'),
                         ), ['b']); ?>
                     <?php else: ?>
                         <?= $escaper->escapeHtml(__(

@@ -10,7 +10,7 @@
     <default>
         <shopreviews_com>
             <general>
-                <version>1.1.0</version>
+                <version>1.1.1</version>
                 <enable>0</enable>
                 <debug>0</debug>
             </general>
