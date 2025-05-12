@@ -9,7 +9,7 @@
         <b class="rating" data-bind="text: reviewsList.summary().averageRating"></b>
         <span class="stars">
             <span class="stars-empty"></span>
-            <span class="stars-filled" 
+            <span class="stars-filled"
                   data-bind="style: {width: +reviewsList.summary().averageRating*20 + '%'}">
             </span>
         </span>
@@ -20,7 +20,7 @@
         <table>
             <tbody data-bind="foreach: Object.values(reviewsList.summary().ratingsCount).reverse()">
                 <tr>
-                    <td class="label" data-bind="i18n: label"></td>
+                    <td class="label" data-bind="text: label"></td>
                     <td class="fill">
                         <div class="fill-row">
                             <div class="filled" data-bind="style: { width: percentage + '%' }"></div>
@@ -108,7 +108,7 @@
                 <span class="label">
                     <span data-bind="i18n: 'Posted on'"></span>
                     <b data-bind="text: platform_name"></b>
-                    <span data-bind="i18n: 'on'"></span>
+                    <span data-bind="i18n: '-'"></span>
                     <b data-bind="text: created"></b>
                 </span>
             </div>

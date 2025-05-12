@@ -168,7 +168,14 @@ class Data extends AbstractModel implements ExtensibleDataInterface, Shopreviews
      */
     public function getScoreSummary(): ?array
     {
-        return $this->getData(self::SCORE_SUMMARY);
+        $summary = $this->getData(self::SCORE_SUMMARY);
+        foreach ($summary as &$scoreType) {
+            if (!empty($scoreType['label'])) {
+                $scoreType['label'] = __((string)$scoreType['label'])->render();
+            }
+        }
+
+        return $summary;
     }
 
     /**
