@@ -19,5 +19,28 @@
         "psr-4": {
             "Shopreviews\\Connect\\": ""
         }
+    },
+    "extra": {
+        "magmodules": {
+            "module-name": {
+                "en": "Shopreview",
+                "nl": "Shopreview"
+            },
+            "links": {
+                "product": {
+                    "en": "https://www.magmodules.eu/magento2-shopreview-com.html",
+                    "nl": "https://www.magmodules.nl/magento2-shopreview-com.html"
+                },
+                "docs": {
+                    "en": "https://www.magmodules.eu/help/magento2-shopreview-com.html",
+                    "nl": "https://www.magmodules.nl/help/magento2-shopreview-com.html"
+                },
+                "support": {
+                    "en": "https://www.magmodules.eu/contact.html",
+                    "nl": "https://www.magmodules.nl/contact.html"
+                }
+            }
+        }
     }
 }
+
